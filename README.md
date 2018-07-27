@@ -1,7 +1,7 @@
 # UnitPay PHP-SDK
 Php sdk for [UnitPay ](https://unitpay.ru) 
  
-Documentation https://unitpay.ru/doc
+Documentation https://help.unitpay.ru
 
 ## Examples ##
 These are just some quick examples. Check out the samples in [`/sample`](https://github.com/unitpay/php-sdk/blob/master/sample).
@@ -55,7 +55,7 @@ header('Content-Type: text/html; charset=UTF-8');
 /**
  * API integration
  *
- * @link https://unitpay.ru/doc#initPayment
+ * @link https://help.unitpay.ru/article/32-creating-payment-via-api
  */
 
 include ('../UnitPay.php');
@@ -83,8 +83,8 @@ $unitPay = new UnitPay($secretKey);
  * alfaClick:
  *      clientId
  *
- * @link https://unitpay.ru/doc#initPayment
- * @link https://unitpay.ru/doc#paymentTypes
+ * @link https://help.unitpay.ru/article/32-creating-payment-via-api
+ * @link https://help.unitpay.ru/article/36-codes-payment-systems
  */
 $response = $unitPay->api('initPayment', [
     'account'     => $orderId,
@@ -132,7 +132,7 @@ if (isset($response->result->type)
 /**
  *  Demo handler for your projects
  *
- * @link https://unitpay.ru/doc#confirmPayment
+ * @link https://help.unitpay.ru/article/35-confirmation-payment
  */
 include ('../UnitPay.php');
 
