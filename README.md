@@ -126,6 +126,50 @@ if (isset($response->result->type)
 }
 ```
 
+### Refund payment using UnitPay Api
+
+```php
+<?php
+
+header('Content-Type: text/html; charset=UTF-8');
+
+/**
+ * API integration
+ *
+ * @link https://help.unitpay.ru/article/60-refund-payment
+ */
+
+include ('../UnitPay.php');
+
+// Project Data
+$secretKey  = '9e977d0c0e1bc8f5cc9775a8cc8744f1';
+
+// UnitPay internal payment id
+$paymentId = 123456;
+
+$unitPay = new UnitPay($secretKey);
+
+/**
+ * Base params: paymentId
+ * Additional params:
+ *  sum
+ *
+ * @link https://help.unitpay.ru/article/60-refund-payment
+ */
+$response = $unitPay->api('refundPayment', [
+    'paymentId'     => $paymentId
+]);
+
+if (isset($response->result) {
+    print $response->result->message;
+
+// If error during api request
+} elseif (isset($response->error)) {
+    $error = $response->error->message;
+    print 'Error: '.$error;
+}
+```
+
 ### Handler sample
 
 ```php
