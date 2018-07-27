@@ -78,11 +78,14 @@ class CashItem
 class UnitPay
 {
     private $supportedCurrencies = array('EUR','UAH', 'BYR', 'USD','RUB');
-    private $supportedUnitpayMethods = array('initPayment', 'getPayment', 'refundPayment');
+    private $supportedUnitpayMethods = array('initPayment', 'getPayment', 'refundPayment', 'massPayment', 'massPaymentStatus', 'getBinInfo');
     private $requiredUnitpayMethodsParams = array(
         'initPayment' => array('account', 'sum', 'desc', 'paymentType', 'projectId', 'ip'),
         'getPayment' => array('paymentId'),
-        'refundPayment' => array('paymentId')
+        'refundPayment' => array('paymentId'),
+        'massPayment' => array('login', 'purse', 'transactionId', 'sum', 'paymentType'),
+        'massPaymentStatus' => array('login', 'transactionId'),
+        'getBinInfo' => array('login', 'bin')
     );
     private $supportedPartnerMethods = array('check', 'pay', 'error');
     private $supportedUnitpayIp = array(
