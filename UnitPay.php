@@ -80,7 +80,7 @@ class UnitPay
     private $supportedCurrencies = array('EUR','UAH', 'BYR', 'USD','RUB');
     private $supportedUnitpayMethods = array('initPayment', 'getPayment');
     private $requiredUnitpayMethodsParams = array(
-        'initPayment' => array('desc', 'account', 'sum'),
+        'initPayment' => array('account', 'sum', 'desc', 'paymentType', 'projectId', 'ip'),
         'getPayment' => array('paymentId')
     );
     private $supportedPartnerMethods = array('check', 'pay', 'error');

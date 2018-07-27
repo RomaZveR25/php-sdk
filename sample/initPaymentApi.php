@@ -14,7 +14,7 @@ require_once('../UnitPay.php');
 $unitPay = new UnitPay($secretKey);
 
 /**
- * Base params: account, desc, sum, currency, projectId, paymentType
+ * Base params: account, desc, sum, currency, projectId, paymentType, ip
  * Additional params:
  *  Qiwi, Mc:
  *      phone
@@ -31,6 +31,7 @@ $response = $unitPay->api('initPayment', [
     'paymentType' => 'yandex',
     'currency' => $orderCurrency,
     'projectId' => $projectId,
+    'ip' => $payerIp
 ]);
 
 // If need user redirect on Payment Gate

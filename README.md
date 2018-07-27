@@ -72,11 +72,12 @@ $orderId        = 'a183f94-1434-1e44';
 $orderSum       = 900;
 $orderDesc      = 'Payment for item "'.$itemName.'"';
 $orderCurrency  = 'RUB';
+$payerIp		= $_SERVER['REMOTE_ADDR'];
 
 $unitPay = new UnitPay($secretKey);
 
 /**
- * Base params: account, desc, sum, currency, projectId, paymentType
+ * Base params: account, desc, sum, currency, projectId, paymentType, ip
  * Additional params:
  *  Qiwi, Mc:
  *      phone
@@ -92,7 +93,8 @@ $response = $unitPay->api('initPayment', [
     'sum'         => $orderSum,
     'paymentType' => 'yandex',
     'currency'    => $orderCurrency,
-    'projectId'   => $projectId
+    'projectId'   => $projectId,
+    'ip'          => $payerIp
 ]);
 
 // If need user redirect on Payment Gate
