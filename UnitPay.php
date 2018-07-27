@@ -104,6 +104,30 @@ class UnitPay
         $this->secretKey = $secretKey;
     }
 
+	/**
+     * Return http response data from url
+     *
+     * @param $url
+     *
+     * @return string
+     */
+	private function getHttpResponse($url) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); 
+		curl_setopt($ch, CURLOPT_TIMEOUT, 15); 
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		$response = curl_exec($ch);
+		if (curl_errno($ch)) {
+			throw new InvalidArgumentException('Temporary server error. Please try again later.');
+		}
+		curl_close($ch);
+
+		return $response;
+    }
+	
     /**
      * Create SHA-256 digital signature
      *
@@ -112,7 +136,7 @@ class UnitPay
      *
      * @return string
      */
-    function getSignature(array $params, $method = null)
+    private function getSignature(array $params, $method = null)
     {
         ksort($params);
         unset($params['sign']);
@@ -131,7 +155,7 @@ class UnitPay
      *
      * @return string
      */
-    protected function getIp()
+    private function getIp()
     {
         return $_SERVER['REMOTE_ADDR'];
     }
@@ -264,7 +288,7 @@ class UnitPay
             'params' => $params
         ], null, '&', PHP_QUERY_RFC3986);
 
-        $response = json_decode(file_get_contents($requestUrl));
+        $response = json_decode($this->getHttpResponse($requestUrl));
         if (!is_object($response)) {
             throw new InvalidArgumentException('Temporary server error. Please try again later.');
         }
