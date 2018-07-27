@@ -81,6 +81,7 @@ class UnitPay
     private $supportedUnitpayMethods = array('initPayment', 'getPayment', 'refundPayment', 
                                              'listSubscriptions', 'getSubscription', 'closeSubscription',
                                              'massPayment', 'massPaymentStatus', 'getBinInfo',
+                                             'getPartner', 'getCommissions'
                                             );
     private $requiredUnitpayMethodsParams = array(
         'initPayment' => array('account', 'sum', 'desc', 'paymentType', 'projectId', 'ip'),
@@ -91,7 +92,9 @@ class UnitPay
         'getBinInfo' => array('login', 'bin'),
         'listSubscriptions ' => array('projectId'),
         'getSubscription' => array('subscriptionId'),
-        'closeSubscription' => array('subscriptionId')
+        'closeSubscription' => array('subscriptionId'),
+        'getPartner' => array('login'),
+        'getCommissions' => array('projectId', 'login')
     );
     private $supportedPartnerMethods = array('check', 'pay', 'error');
     private $supportedUnitpayIp = array(
