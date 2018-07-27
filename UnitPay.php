@@ -17,7 +17,7 @@
  *
  * EXTENSION INFORMATION
  *
- * UNITPAY API       https://unitpay.ru/doc
+ * UNITPAY API       https://help.unitpay.ru
  *
  */
 
@@ -110,6 +110,8 @@ class UnitPay
      * @param $url
      *
      * @return string
+	 *
+     * @throws InvalidArgumentException
      */
 	private function getHttpResponse($url) {
 		$ch = curl_init();
@@ -327,7 +329,7 @@ class UnitPay
 
         /**
          * IP address check
-         * @link http://help.unitpay.ru/article/67-ip-addresses
+         * @link https://help.unitpay.ru/article/67-ip-addresses
          */
         if (!in_array($ip, $this->supportedUnitpayIp)) {
             throw new InvalidArgumentException('IP address Error');
