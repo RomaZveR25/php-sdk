@@ -299,7 +299,7 @@ class UnitPay
             throw new InvalidArgumentException('SecretKey is null');
         }
 		
-		if ($method === 'initPayment' && empty($params['ip'])) {
+        if ($method === 'initPayment' && empty($params['ip'])) {
             $params['ip'] = $this->getIp();
         }
 
