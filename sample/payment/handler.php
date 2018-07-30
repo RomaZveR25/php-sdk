@@ -7,7 +7,7 @@
  */
 
 require_once('./orderInfo.php');
-require_once('../UnitPay.php');
+require_once('../../UnitPay.php');
 
 $unitPay = new UnitPay($secretKey);
 

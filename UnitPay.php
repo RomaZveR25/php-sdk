@@ -170,7 +170,7 @@ class UnitPay
      *
      * @return string
      */
-    private function getIp()
+    protected function getIp()
     {
         return $_SERVER['REMOTE_ADDR'];
     }
