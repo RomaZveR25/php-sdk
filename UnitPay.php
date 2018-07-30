@@ -85,7 +85,7 @@ class UnitPay
         'getPartner', 'getCommissions'
     ];
     private $requiredUnitpayMethodsParams = [
-        'initPayment' => ['account', 'sum', 'desc', 'paymentType', 'projectId', 'ip'],
+        'initPayment' => ['account', 'sum', 'desc', 'paymentType', 'projectId'],
         'getPayment' => ['paymentId'],
         'refundPayment' => ['paymentId'],
         'massPayment' => ['login', 'purse', 'transactionId', 'sum', 'paymentType'],
@@ -297,6 +297,10 @@ class UnitPay
         $params['secretKey'] = $this->secretKey;
         if (empty($params['secretKey'])) {
             throw new InvalidArgumentException('SecretKey is null');
+        }
+		
+		if ($method === 'initPayment' && empty($params['ip'])) {
+            $params['ip'] = $this->getIp();
         }
 
         $requestUrl = self::API_URL . '?' . http_build_query([
