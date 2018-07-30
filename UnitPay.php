@@ -77,37 +77,38 @@ class CashItem
  */
 class UnitPay
 {
-    private $supportedCurrencies = array('EUR','UAH', 'BYR', 'USD','RUB');
-    private $supportedUnitpayMethods = array('initPayment', 'getPayment', 'refundPayment', 
-                                             'listSubscriptions', 'getSubscription', 'closeSubscription',
-                                             'massPayment', 'massPaymentStatus', 'getBinInfo',
-                                             'getPartner', 'getCommissions'
-                                            );
-    private $requiredUnitpayMethodsParams = array(
-        'initPayment' => array('account', 'sum', 'desc', 'paymentType', 'projectId', 'ip'),
-        'getPayment' => array('paymentId'),
-        'refundPayment' => array('paymentId'),
-        'massPayment' => array('login', 'purse', 'transactionId', 'sum', 'paymentType'),
-        'massPaymentStatus' => array('login', 'transactionId'),
-        'getBinInfo' => array('login', 'bin'),
-        'listSubscriptions ' => array('projectId'),
-        'getSubscription' => array('subscriptionId'),
-        'closeSubscription' => array('subscriptionId'),
-        'getPartner' => array('login'),
-        'getCommissions' => array('projectId', 'login')
-    );
-    private $supportedPartnerMethods = array('check', 'pay', 'error');
-    private $supportedUnitpayIp = array(
+    private $supportedCurrencies = ['EUR','UAH', 'BYR', 'USD','RUB'];
+    private $supportedUnitpayMethods = [
+		'initPayment', 'getPayment', 'refundPayment', 
+        'listSubscriptions', 'getSubscription', 'closeSubscription',
+        'massPayment', 'massPaymentStatus', 'getBinInfo',
+        'getPartner', 'getCommissions'
+    ];
+    private $requiredUnitpayMethodsParams = [
+        'initPayment' => ['account', 'sum', 'desc', 'paymentType', 'projectId', 'ip'],
+        'getPayment' => ['paymentId'],
+        'refundPayment' => ['paymentId'],
+        'massPayment' => ['login', 'purse', 'transactionId', 'sum', 'paymentType'],
+        'massPaymentStatus' => ['login', 'transactionId'],
+        'getBinInfo' => ['login', 'bin'],
+        'listSubscriptions ' => ['projectId'],
+        'getSubscription' => ['subscriptionId'],
+        'closeSubscription' => ['subscriptionId'],
+        'getPartner' => ['login'],
+        'getCommissions' => ['projectId', 'login']
+    ];
+    private $supportedPartnerMethods = ['check', 'pay', 'error'];
+    private $supportedUnitpayIp = [
         '31.186.100.49',
         '178.132.203.105',
         '52.29.152.23',
         '52.19.56.234',
         '127.0.0.1' // for debug
-    );
+    ];
 
     private $secretKey;
 
-    private $params = array();
+    private $params = [];
 
     const API_URL  = 'https://unitpay.ru/api';
     const FORM_URL = 'https://unitpay.ru/pay/';
@@ -189,12 +190,12 @@ class UnitPay
      */
     public function form($publicKey, $sum, $account, $desc, $currency = 'RUB', $locale = 'ru')
     {
-        $vitalParams = array(
+        $vitalParams = [
             'account'  => $account,
             'currency' => $currency,
             'desc'     => $desc,
             'sum'      => $sum
-        );
+        ];
 
         $this->params = array_merge($this->params, $vitalParams);
 
@@ -246,11 +247,11 @@ class UnitPay
             json_encode(
                 array_map(function ($item) {
                     /** @var CashItem $item */
-                    return array(
+                    return [
                         'name'  => $item->getName(),
                         'count' => $item->getCount(),
                         'price' => $item->getPrice()
-                    );
+                    ];
                 }, $items)));
 
         return $this;
@@ -360,11 +361,11 @@ class UnitPay
      */
     public function getSuccessHandlerResponse($message)
     {
-        return json_encode(array(
-            "result" => array(
+        return json_encode([
+            "result" => [
                 "message" => $message
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -376,10 +377,10 @@ class UnitPay
      */
     public function getErrorHandlerResponse($message)
     {
-        return json_encode(array(
-            "error" => array(
+        return json_encode([
+            "error" => [
                 "message" => $message
-            )
-        ));
+            ]
+        ]);
     }
 }
